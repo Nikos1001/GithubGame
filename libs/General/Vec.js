@@ -8,6 +8,16 @@ class Vec {
     this.z = z;
   }
 
+  toVec() {
+    return new Vec(this.x, this.y, this.z);
+  }
+
+  mult(mag) {
+    this.x *= mag;
+    this.y *= mag;
+    // we leave out z cause its mostly used for parallaxing
+  }
+
 }
 
 class Polar {
@@ -24,6 +34,10 @@ class Polar {
 
   rotate(angle) {
     return new Polar(this.a + angle, this.r, this.z);
+  }
+
+  mult(mag) {
+    this.r *= mag;
   }
 
 }
