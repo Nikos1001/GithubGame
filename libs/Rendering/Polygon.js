@@ -10,7 +10,6 @@ class Polygon {
     stroke(255);
     strokeWeight(2);
     ellipse(width / 2, height / 2, 100, 100);
-    console.log("test");
   }
 
 }
