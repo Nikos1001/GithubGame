@@ -16,6 +16,13 @@ class Vec {
     this.x *= mag;
     this.y *= mag;
     // we leave out z cause its mostly used for parallaxing
+
+    return this;
+  }
+
+  add(vec) {
+    this.x += vec.x;
+    this.y += vec.y;
   }
 
 }
