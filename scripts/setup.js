@@ -1,36 +1,22 @@
 
-
-let c, m;
-let p;
-
-let input;
+let world;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(0);
-
-  input = new InputManager();
-
-  c = new Camera();
-  p = new Player(new Vec(0, 0, 0), 1);
-  m = new Meteor(new Vec(2, 0, 0), 1);
+  world = new World();
+  world.addBody(new Player(new Vec(0, 0, 0), 1));
 }
 
 function draw() {
-  background(0);
-  p.display(c);
-  m.display(c);
-
-  m.update(deltaTime / 1000.0);
-  p.update(deltaTime / 1000.0);
-
-  console.log(input.keys);
+  world.render();
+  world.update();
 }
 
 function keyPressed() {
-  input.keyPressed();
+  world.keyPressed();
 }
 
 function keyReleased() {
-  input.keyReleased();
+  world.keyReleased();
 }

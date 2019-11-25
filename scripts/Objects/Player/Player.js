@@ -14,11 +14,19 @@ class Player extends Body {
     this.p.addConnection(1, 2, SEG_TYPES.line);
     this.p.addConnection(2, 3, SEG_TYPES.line);
     this.p.addConnection(3, 0, SEG_TYPES.line);
+
+    this.angle = 0;
   }
 
-  update(delta) {
-    super.update(delta);
+  update(delta, input) {
+    super.update(delta, input);
     this.p.setLoc(this.loc);
+    this.p.setTransform(this.angle, 1);
+
+    if(input.keys['a']) {
+      this.angle -= TAU * delta;
+    }
+
   }
 
   display(cam) {

@@ -36,8 +36,8 @@ class Meteor extends Body {
     this.p.setTransform(TAU / 2, 0.5);
   }
 
-  update(delta) {
-    super.update(delta);
+  update(delta, input) {
+    super.update(delta, input);
     this.p.setTransform(this.a, 0.5);
     this.a += TAU * delta / 4;
     this.p.setLoc(this.loc);
