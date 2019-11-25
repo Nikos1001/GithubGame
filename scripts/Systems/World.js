@@ -14,7 +14,15 @@ class World {
     let cam = this.cams[this.activeCam];
     for(let i = 0; i < this.bodies.length; i ++) {
       let body = this.bodies[i];
-      body.display(cam);
+      let diff = cam.loc.clone();
+      diff.sub(body.loc);
+      if(diff.mag() < 20) {
+        console.log(diff.mag());
+      }
+
+      if(diff.mag() < 2 * cam.unitsWide) {
+        body.display(cam);
+      }
     }
   }
 
