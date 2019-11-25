@@ -23,6 +23,16 @@ class World {
       let body = this.bodies[i];
       body.update(deltaTime / 1000.0, this.input);
     }
+
+    for(let i = 0; i < this.bodies.length; i ++) {
+      let b1 = this.bodies[i];
+      for(let j = 0; j < this.bodies.length; j ++) {
+        if(i != j) {
+          let b2 = this.bodies[j];
+          b1.collide(b2);
+        }
+      }
+    }
   }
 
   keyPressed() {

@@ -31,6 +31,8 @@ class Player extends Body {
     this.rotateSpeed = 1;
     this.decelaration = 1;
     this.maxSpeed = 3;
+
+    this.radius = 0.16;
   }
 
   update(delta, input) {

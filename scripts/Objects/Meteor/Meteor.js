@@ -34,6 +34,8 @@ class Meteor extends Body {
     }
     this.p.addConnection(0, id - 1, SEG_TYPES.line);
     this.p.setTransform(TAU / 2, this.mass / 2);
+
+    this.radius = mass / 2;
   }
 
   update(delta, input) {
