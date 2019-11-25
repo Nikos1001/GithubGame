@@ -1,19 +1,19 @@
 
 class Polygon {
 
-  constructor(cam) {
+  constructor() {
     this.verts = [];
     this.localVerts = [];
     this.seg = [];
-    this.cam = cam;
+    this.loc = new Vec(0, 0, 0);
   }
 
-  display() {
+  display(cam) {
     noFill();
     stroke(255);
     strokeWeight(2);
     for(let i = 0; i < this.seg.length; i ++) {
-      this.seg[i].render(this.cam);
+      this.seg[i].render(cam, this.loc);
     }
   }
 
@@ -32,6 +32,10 @@ class Polygon {
       this.localVerts[i].r = this.verts[i].r * r;
       this.localVerts[i].z = this.verts[i].z;
     }
+  }
+
+  setLoc(loc) {
+    this.loc = loc.clone();
   }
 
 }

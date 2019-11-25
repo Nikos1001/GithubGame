@@ -25,6 +25,10 @@ class Vec {
     this.y += vec.y;
   }
 
+  clone() {
+    return new Vec(this.x, this.y, this.z);
+  }
+
 }
 
 class Polar {

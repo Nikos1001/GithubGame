@@ -7,10 +7,14 @@ class Segment {
     this.type = type;
   }
 
-  render(cam) {
+  render(cam, loc) {
 
-    let v1 = this.v1.toVec(); v1 = cam.worldToScreen(v1);
-    let v2 = this.v2.toVec(); v2 = cam.worldToScreen(v2);
+    let v1 = this.v1.toVec();
+    v1.add(loc);
+    v1 = cam.worldToScreen(v1);
+    let v2 = this.v2.toVec();
+    v2.add(loc);
+    v2 = cam.worldToScreen(v2);
 
     switch(this.type) {
       case SEG_TYPES.line:
