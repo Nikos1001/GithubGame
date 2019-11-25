@@ -34,7 +34,9 @@ class Body {
       diff.norm();
       diff.mult(this.radius + body.radius);
       this.loc = body.loc.clone().add(diff);
-      this.vel = new Vec(0, 0, 0);
+
+      diff.norm();
+      this.vel = diff.clone();
     }
   }
 
