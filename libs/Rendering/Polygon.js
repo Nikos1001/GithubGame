@@ -28,12 +28,9 @@ class Polygon {
 
   setTransform(a, r) {
     for(let i = 0; i < this.verts.length; i ++) {
-      this.localVerts[i].a = this.verts[i].a;
-      this.localVerts[i].r = this.verts[i].r;
+      this.localVerts[i].a = this.verts[i].a + a;
+      this.localVerts[i].r = this.verts[i].r * r;
       this.localVerts[i].z = this.verts[i].z;
-
-      this.localVerts[i].r *= r;
-      this.localVerts[i] = this.localVerts[i].rotate(a);
     }
   }
 

@@ -20,7 +20,7 @@ function setup() {
   for(let i = 0; i < v; i ++) {
     p.addVert(new Polar(angles[i], 1, 0));
     let offset = random(0, 0.2);
-    let rOffset = random(0.05, 0.15);
+    let rOffset = random(0.075, 0.25);
     if(i < v - 1) {
       p.addVert(new Polar(angles[i + 1] - offset, 1 + rOffset, 0));
       p.addVert(new Polar(angles[i + 1] + offset, 1 - rOffset, 0));
@@ -28,11 +28,13 @@ function setup() {
       p.addVert(new Polar(angles[0] - offset, 1 + rOffset, 0));
       p.addVert(new Polar(angles[0] + offset, 1 - rOffset, 0));
     }
-    p.addConnection(id, id + 1, SEG_TYPES.line);
-    p.addConnection(id + 1, id + 2, SEG_TYPES.line);
+    if(id < v * 3 - 2) {
+      p.addConnection(id, id + 1, SEG_TYPES.line);
+      p.addConnection(id + 1, id + 2, SEG_TYPES.line);
+    }
     id += 3;
   }
-  p.addConnection(0, id, SEG_TYPES.line);
+  p.addConnection(0, id - 1, SEG_TYPES.line);
   p.setTransform(TAU / 2, 0.5);
 }
 
