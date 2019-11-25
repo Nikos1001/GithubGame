@@ -33,12 +33,12 @@ class Meteor extends Body {
       id += 3;
     }
     this.p.addConnection(0, id - 1, SEG_TYPES.line);
-    this.p.setTransform(TAU / 2, 0.5);
+    this.p.setTransform(TAU / 2, this.mass / 2);
   }
 
   update(delta, input) {
     super.update(delta, input);
-    this.p.setTransform(this.a, 0.5);
+    this.p.setTransform(this.a, this.mass / 2);
     this.a += TAU * delta / 4;
     this.p.setLoc(this.loc);
   }
