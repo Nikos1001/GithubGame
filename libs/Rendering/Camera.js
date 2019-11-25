@@ -14,10 +14,15 @@ class Camera {
     v.x -= this.loc.x;
     v.y -= this.loc.y;
 
-    // step 2: scale
+    // step 2: parallax
+    v.x /= (v.z + 1);
+    v.y /= (v.z + 1);
+
+    // step 3: scale
     let pxPerUnit = width / this.unitsWide;
     v.mult(pxPerUnit);
 
+    // step 4: center
     v.x += width / 2;
     v.y += height / 2;
 

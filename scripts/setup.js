@@ -6,6 +6,7 @@ function setup() {
   background(0);
   world = new World();
   world.addBody(new Player(new Vec(0, 0, 0), 1));
+  world.addBody(new Meteor(new Vec(4, 0, 0), 1));
 }
 
 function draw() {

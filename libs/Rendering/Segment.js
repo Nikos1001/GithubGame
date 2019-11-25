@@ -18,6 +18,11 @@ class Segment {
 
     switch(this.type) {
       case SEG_TYPES.line:
+        stroke(255);
+        line(v1.x, v1.y, v2.x, v2.y);
+        break;
+      case SEG_TYPES.red:
+        stroke(255, 125, 0);
         line(v1.x, v1.y, v2.x, v2.y);
         break;
     }

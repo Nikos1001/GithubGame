@@ -22,6 +22,7 @@ class Polygon {
   }
 
   addVert(v) {
+    console.log(v.z);
     this.verts.push(v.clone());
     this.localVerts.push(v.clone());
   }

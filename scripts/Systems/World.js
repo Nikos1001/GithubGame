@@ -10,6 +10,7 @@ class World {
   }
 
   render() {
+    background(0, 0, 0, 180);
     let cam = this.cams[this.activeCam];
     for(let i = 0; i < this.bodies.length; i ++) {
       let body = this.bodies[i];

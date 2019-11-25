@@ -23,10 +23,16 @@ class Vec {
   add(vec) {
     this.x += vec.x;
     this.y += vec.y;
+    this.z += vec.z;
+    return this;
   }
 
   clone() {
     return new Vec(this.x, this.y, this.z);
+  }
+
+  mag() {
+    return sqrt(this.x * this.x + this.y * this.y);
   }
 
 }
