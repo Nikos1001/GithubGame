@@ -40,4 +40,8 @@ class Polar {
     this.r *= mag;
   }
 
+  clone() {
+    return new Polar(this.a, this.r, this.z);
+  }
+
 }

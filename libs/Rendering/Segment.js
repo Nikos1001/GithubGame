@@ -10,6 +10,9 @@ class Segment {
   render(cam) {
 
     let v1 = this.v1.toVec(); v1 = cam.worldToScreen(v1);
+
+    console.log(this.v2);
+
     let v2 = this.v2.toVec(); v2 = cam.worldToScreen(v2);
 
     switch(this.type) {
