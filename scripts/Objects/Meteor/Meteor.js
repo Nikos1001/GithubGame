@@ -53,4 +53,8 @@ class Meteor extends Body {
     super.addForce(force);
   }
 
+  getType() {
+    return 'meteor';
+  }
+
 }

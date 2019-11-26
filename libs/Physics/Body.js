@@ -37,7 +37,17 @@ class Body {
 
       diff.norm();
       this.vel = diff.clone();
+
+      this.onCollide(body);
     }
+  }
+
+  getType() {
+    return 'body';
+  }
+
+  onCollide(b) {
+
   }
 
 }

@@ -16,9 +16,6 @@ class World {
       let body = this.bodies[i];
       let diff = cam.loc.clone();
       diff.sub(body.loc);
-      if(diff.mag() < 20) {
-        console.log(diff.mag());
-      }
 
       if(diff.mag() < 2 * cam.unitsWide) {
         body.display(cam);
@@ -27,10 +24,15 @@ class World {
   }
 
   update() {
+    let newBodies = [];
     for(let i = 0; i < this.bodies.length; i ++) {
       let body = this.bodies[i];
-      body.update(deltaTime / 1000.0, this.input);
+      if(!body.update(deltaTime / 1000.0, this.input)) {
+        newBodies.push(body);
+      }
     }
+    this.bodies = newBodies;
+
 
     for(let i = 0; i < this.bodies.length; i ++) {
       let b1 = this.bodies[i];

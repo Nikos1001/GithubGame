@@ -33,6 +33,8 @@ class Player extends Body {
     this.maxSpeed = 3;
 
     this.radius = 0.16;
+
+    this.health = 5;
   }
 
   update(delta, input) {
@@ -61,6 +63,12 @@ class Player extends Body {
     }
 
     this.thrusting = input.keys['w'] && !input.keys['s'];
+
+    console.log(this.health);
+
+    if(this.health < 0) {
+      return true;
+    }
   }
 
   display(cam) {
@@ -74,6 +82,14 @@ class Player extends Body {
 
   addForce(force) {
     super.addForce(force);
+  }
+
+  getBody() {
+    return 'rocket';
+  }
+
+  onCollide(b) {
+    this.health -= b.mass;
   }
 
 }
