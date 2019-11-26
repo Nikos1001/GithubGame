@@ -9,6 +9,8 @@ class Body {
     this.acc = new Vec(0, 0, 0);
 
     this.radius = 1;
+
+    this.alwaysRender = false;
   }
 
   update(delta, input) {

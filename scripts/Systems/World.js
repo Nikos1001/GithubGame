@@ -24,7 +24,7 @@ class World {
       let diff = cam.loc.clone();
       diff.sub(body.loc);
 
-      if(diff.mag() < 2 * cam.unitsWide) {
+      if(diff.mag() < 2 * cam.unitsWide || body.alwaysRender) {
         body.display(cam);
       }
     }
@@ -33,14 +33,28 @@ class World {
   }
 
   update() {
-    let newBodies = [];
+
+    for(let i = 0; i < this.bodies.length; i ++) {
+      let b1 = this.bodies[i];
+      for(let j = 0; j < this.bodies.length; j ++) {
+        if(i != j) {
+          let b2 = this.bodies[j];
+          b1.collide(b2);
+        }
+      }
+    }
+
+
+    let newBodies = []
     this.minX = 9999999999; this.minY = 9999999999;
     this.maxX = -9999999999; this.maxY = -9999999999;
+
     for(let i = 0; i < this.bodies.length; i ++) {
       let body = this.bodies[i];
 
       let x = body.loc.x;
       let y = body.loc.y;
+      let r = body.radius;
 
       if(x > this.maxX) this.maxX = x;
       if(y > this.maxY) this.maxY = y;
@@ -56,16 +70,6 @@ class World {
 
     this.bodies = newBodies;
 
-
-    for(let i = 0; i < this.bodies.length; i ++) {
-      let b1 = this.bodies[i];
-      for(let j = 0; j < this.bodies.length; j ++) {
-        if(i != j) {
-          let b2 = this.bodies[j];
-          b1.collide(b2);
-        }
-      }
-    }
   }
 
   keyPressed() {

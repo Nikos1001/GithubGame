@@ -24,6 +24,8 @@ class SolarSystem extends WorldGenerator {
       }
       world.addBody(new Meteor(new Vec(cos(angle) * radius, sin(angle) * radius, 0), random(0.25, 1.5)));
     }
+    world.addBody(new Sun(new Vec(0, 0, 0), 50, 50));
+
     world.addBody(new Player(new Vec(r, 0, 0), 1));
 
 
