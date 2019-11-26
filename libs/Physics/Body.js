@@ -36,7 +36,7 @@ class Body {
       this.loc = body.loc.clone().add(diff);
 
       diff.norm();
-      this.vel = diff.clone();
+      this.addForce(diff.clone());
 
       this.onCollide(body);
     }

@@ -56,6 +56,11 @@ class Player extends Body {
       thrust.mult(delta * this.thrustForce);
       if(this.vel.mag() < this.maxSpeed) {
         this.addForce(thrust);
+      } else {
+        let diff = this.vel.clone().sub(thrust);
+        if(diff.mag() > this.maxSpeed / 10) {
+          this.addForce(thrust);
+        }
       }
     }
     if(input.keys['s'] && !input.keys['w']) {

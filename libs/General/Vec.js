@@ -46,6 +46,10 @@ class Vec {
     this.mult(1 / this.mag());
   }
 
+  static lerp(v1, v2, a) {
+    return new Vec(v1.x * a + v2.x * (1 - a), v1.y * a + v2.y * (1 - a), v1.z * a + v2.z * (1 - a));
+  }
+
 }
 
 class Polar {
