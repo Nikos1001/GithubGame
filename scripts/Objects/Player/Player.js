@@ -92,4 +92,8 @@ class Player extends Body {
     this.health -= b.mass;
   }
 
+  getColor() {
+    return [255, 0, 0];
+  }
+
 }

@@ -7,6 +7,12 @@ class World {
     this.cams = [new Camera()];
     this.input = new InputManager();
     this.activeCam = 0;
+    this.minimap = new Minimap(this);
+
+    this.avgX = 0; this.avgY = 0;
+    this.minX = 0; this.minY = 0;
+    this.maxX = 0; this.maxY = 0;
+
   }
 
   render() {
@@ -21,16 +27,35 @@ class World {
         body.display(cam);
       }
     }
+
+    this.minimap.render();
   }
 
   update() {
     let newBodies = [];
+    this.avgX = 0; this.avgY = 0;
+    this.minX = 9999999999; this.minY = 9999999999;
+    this.maxX = -9999999999; this.maxY = -9999999999;
     for(let i = 0; i < this.bodies.length; i ++) {
       let body = this.bodies[i];
+
+      let x = body.loc.x; this.avgX += x;
+      let y = body.loc.y; this.avgY += y;
+
+      if(x > this.maxX) this.maxX = x;
+      if(y > this.maxY) this.maxY = y;
+
+      if(x < this.minX) this.minX = x;
+      if(y < this.minY) this.minY = y;
+
       if(!body.update(deltaTime / 1000.0, this.input)) {
         newBodies.push(body);
       }
     }
+
+    this.avgX /= this.bodies.length;
+    this.avgY /= this.bodies.length;
+
     this.bodies = newBodies;
 
 

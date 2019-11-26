@@ -57,4 +57,8 @@ class Meteor extends Body {
     return 'meteor';
   }
 
+  getColor() {
+    return [125, 125, 125];
+  }
+
 }

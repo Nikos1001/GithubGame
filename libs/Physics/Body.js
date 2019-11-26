@@ -50,4 +50,8 @@ class Body {
 
   }
 
+  getColor() {
+    return [255, 255, 255];
+  }
+
 }

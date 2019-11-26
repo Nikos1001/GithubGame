@@ -9,7 +9,7 @@ class Element {
   }
 
   render() {
-    pushMatrix();
+    push();
 
     switch(this.align) {
       case ALIGN.center:
