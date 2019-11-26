@@ -7,7 +7,9 @@ class World {
     this.cams = [new Camera()];
     this.input = new InputManager();
     this.activeCam = 0;
-    this.minimap = new Minimap(this);
+    this.ui = new UICanvas();
+
+    this.ui.elements.push(new Minimap(this));
 
     this.minX = 0; this.minY = 0;
     this.maxX = 0; this.maxY = 0;
@@ -27,7 +29,7 @@ class World {
       }
     }
 
-    this.minimap.render();
+    this.ui.render();
   }
 
   update() {

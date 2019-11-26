@@ -1,6 +1,6 @@
 
 let world;
-const r = 300;
+const r = 500;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -8,7 +8,7 @@ function setup() {
   world = new World();
   world.cams[0].loc = new Vec(r, 0, 0);
 
-  const nAsteroids = 1000;
+  const nAsteroids = 1250;
   for(let i = 0; i < nAsteroids; i ++) {
     let angle = i * TAU / nAsteroids;
     let radius;
