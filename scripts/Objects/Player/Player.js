@@ -45,27 +45,16 @@ class Player extends Body {
     this.fire.setTransform(this.angle, 1);
 
     if(input.keys['a']) {
-      this.angle -= TAU * delta * this.rotateSpeed;
+      this.turn(delta, -1);
     }
     if(input.keys['d']) {
-      this.angle += TAU * delta * this.rotateSpeed;
+      this.turn(delta, 1);
     }
     if(input.keys['w'] && !input.keys['s']) {
-      let thrust = new Polar(this.angle, 1, 0);
-      thrust = thrust.toVec();
-      thrust.mult(delta * this.thrustForce);
-      if(this.vel.mag() < this.maxSpeed) {
-        this.addForce(thrust);
-      } else {
-        let targetThrust = new Polar(this.angle, this.maxSpeed * delta, 0);
-        let diff = this.vel.clone().sub(targetThrust.toVec());
-        if(diff.mag() > this.maxSpeed / 10) {
-          this.addForce(thrust);
-        }
-      }
+      this.thrust(delta);
     }
     if(input.keys['s'] && !input.keys['w']) {
-      this.vel.mult(1 - delta * this.decelaration);
+      this.decelerate(delta);
     }
 
     this.thrusting = input.keys['w'] && !input.keys['s'];
@@ -100,6 +89,29 @@ class Player extends Body {
 
   getColor() {
     return [255, 0, 0];
+  }
+
+  turn(delta, dir) {
+    this.angle += dir * TAU * delta * this.rotateSpeed;
+  }
+
+  thrust(delta) {
+    let thrust = new Polar(this.angle, 1, 0);
+    thrust = thrust.toVec();
+    thrust.mult(delta * this.thrustForce);
+    if(this.vel.mag() < this.maxSpeed) {
+      this.addForce(thrust);
+    } else {
+      let targetThrust = new Polar(this.angle, this.maxSpeed * delta, 0);
+      let diff = this.vel.clone().sub(targetThrust.toVec());
+      if(diff.mag() > this.maxSpeed / 10) {
+        this.addForce(thrust);
+      }
+    }
+  }
+
+  decelerate(delta) {
+    this.vel.mult(1 - delta * this.decelaration);
   }
 
 }
