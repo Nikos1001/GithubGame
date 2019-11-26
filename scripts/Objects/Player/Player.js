@@ -1,48 +1,13 @@
 
 
-class Player extends Body {
+class Player extends Rocket {
 
   constructor(loc, mass) {
     super(loc, mass);
-    this.p = new Polygon();
-    this.p.addVert(new Polar(0, 0.33, 0)); // 0
-    this.p.addVert(new Polar(3 * TAU / 8, 0.33, 0)); // 1
-    this.p.addVert(new Polar(TAU / 2, 0.16, 0)); // 2
-    this.p.addVert(new Polar(5 * TAU / 8, 0.33, 0)); // 3
-
-    this.p.addConnection(0, 1, SEG_TYPES.line);
-    this.p.addConnection(1, 2, SEG_TYPES.line);
-    this.p.addConnection(2, 3, SEG_TYPES.line);
-    this.p.addConnection(3, 0, SEG_TYPES.line);
-
-    this.fire = new Polygon();
-    this.fire.addVert(new Polar(3.5 * TAU / 8, 0.24, 0)); // 0
-    this.fire.addVert(new Polar(TAU / 2, 0.33, 0)); // 1
-    this.fire.addVert(new Polar(4.5 * TAU / 8, 0.24, 0)); // 2
-
-    this.fire.addConnection(0, 1, SEG_TYPES.red);
-    this.fire.addConnection(1, 2, SEG_TYPES.red);
-
-    this.angle = 0;
-    this.thrusting = false;
-
-
-    this.thrustForce = 1.5;
-    this.rotateSpeed = 1;
-    this.decelaration = 1;
-    this.maxSpeed = 3;
-
-    this.radius = 0.16;
-
-    this.health = 5;
   }
 
   update(delta, input) {
-    super.update(delta, input);
-    this.p.setLoc(this.loc);
-    this.fire.setLoc(this.loc);
-    this.p.setTransform(this.angle, 1);
-    this.fire.setTransform(this.angle, 1);
+    if(super.update(delta, input)) return true;
 
     if(input.keys['a']) {
       this.turn(delta, -1);
@@ -52,27 +17,19 @@ class Player extends Body {
     }
     if(input.keys['w'] && !input.keys['s']) {
       this.thrust(delta);
+      this.thrusting = true;
     }
     if(input.keys['s'] && !input.keys['w']) {
       this.decelerate(delta);
     }
 
-    this.thrusting = input.keys['w'] && !input.keys['s'];
-
-    console.log(this.health);
-
-    if(this.health < 0) {
-      return true;
-    }
   }
 
   display(cam) {
-    this.p.display(cam);
-    if(this.thrusting) {
-      this.fire.display(cam);
-    }
+    super.display(cam);
 
     cam.loc = this.loc.clone();
+
   }
 
   addForce(force) {
@@ -84,7 +41,7 @@ class Player extends Body {
   }
 
   onCollide(b) {
-    this.health -= b.mass;
+    super.onCollide(b);
   }
 
   getColor() {
@@ -92,26 +49,15 @@ class Player extends Body {
   }
 
   turn(delta, dir) {
-    this.angle += dir * TAU * delta * this.rotateSpeed;
+    super.turn(delta, dir);
   }
 
   thrust(delta) {
-    let thrust = new Polar(this.angle, 1, 0);
-    thrust = thrust.toVec();
-    thrust.mult(delta * this.thrustForce);
-    if(this.vel.mag() < this.maxSpeed) {
-      this.addForce(thrust);
-    } else {
-      let targetThrust = new Polar(this.angle, this.maxSpeed * delta, 0);
-      let diff = this.vel.clone().sub(targetThrust.toVec());
-      if(diff.mag() > this.maxSpeed / 10) {
-        this.addForce(thrust);
-      }
-    }
+    super.thrust(delta);
   }
 
   decelerate(delta) {
-    this.vel.mult(1 - delta * this.decelaration);
+    super.decelerate(delta);
   }
 
 }

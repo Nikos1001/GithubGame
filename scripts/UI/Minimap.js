@@ -18,8 +18,9 @@ class Minimap extends Element {
 
       let x = map(loc.x, world.minX - 100, world.maxX + 100, 0, 200);
       let y = map(loc.y, world.minY - 100, world.maxY + 100, 0, 200);
+      let scl = map(b.radius, world.minX - 100, world.maxX - 100, 0, 3);
 
-      rect(x, y, 2, 2);
+      ellipse(x, y, scl, scl);
     }
     stroke(255);
     strokeWeight(3);
