@@ -57,7 +57,8 @@ class Player extends Body {
       if(this.vel.mag() < this.maxSpeed) {
         this.addForce(thrust);
       } else {
-        let diff = this.vel.clone().sub(thrust);
+        let targetThrust = new Polar(this.angle, this.maxSpeed * delta, 0);
+        let diff = this.vel.clone().sub(targetThrust.toVec());
         if(diff.mag() > this.maxSpeed / 10) {
           this.addForce(thrust);
         }
