@@ -14,6 +14,8 @@ class World {
     this.minX = 0; this.minY = 0;
     this.maxX = 0; this.maxY = 0;
 
+    this.sectors = 20;
+
   }
 
   render() {
@@ -34,11 +36,16 @@ class World {
 
   update() {
 
+    let sectorSize = (TAU / this.sectors);
+
+    let camPolarLoc = this.cams[this.activeCam].loc.toPolar();
+    let camSector = camPolarLoc.a / sectorSize;
+
     for(let i = 0; i < this.bodies.length; i ++) {
       let b1 = this.bodies[i];
       for(let j = 0; j < this.bodies.length; j ++) {
+        let b2 = this.bodies[j];
         if(i != j) {
-          let b2 = this.bodies[j];
           b1.collide(b2);
         }
       }
@@ -52,6 +59,9 @@ class World {
     for(let i = 0; i < this.bodies.length; i ++) {
       let body = this.bodies[i];
 
+      let polarLoc = body.loc.toPolar();
+      let sector = polarLoc.a / sectorSize;
+
       let x = body.loc.x;
       let y = body.loc.y;
       let r = body.radius;
@@ -62,7 +72,13 @@ class World {
       if(x < this.minX) this.minX = x;
       if(y < this.minY) this.minY = y;
 
-      if(!body.update(deltaTime / 1000.0, this.input)) {
+      if(abs(sector - camSector) < sectorSize || body.alwaysRender) {
+
+        if(!body.update(deltaTime / 1000.0, this.input)) {
+          newBodies.push(body);
+        }
+
+      } else {
         newBodies.push(body);
       }
     }

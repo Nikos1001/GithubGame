@@ -50,6 +50,23 @@ class Vec {
     return new Vec(v1.x * a + v2.x * (1 - a), v1.y * a + v2.y * (1 - a), v1.z * a + v2.z * (1 - a));
   }
 
+  toPolar() {
+
+    let r = this.mag();
+
+    let a = atan(this.y / this.x);
+
+    if(this.x < 0) {
+      a += TAU / 2;
+    } else {
+      if(this.y < 0) {
+        a += TAU;
+      }
+    }
+
+    return new Polar(a, r, this.z);
+  }
+
 }
 
 class Polar {
