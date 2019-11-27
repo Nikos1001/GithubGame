@@ -38,6 +38,7 @@ class Rocket extends Body {
     this.health = 5;
 
     this.alwaysRender = true;
+    this.active = true;
   }
 
   update(delta, input) {

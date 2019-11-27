@@ -26,11 +26,12 @@ class SolarSystem extends WorldGenerator {
     }
     world.addBody(new Sun(new Vec(0, 0, 0), 50, 50));
 
-    world.addBody(new Player(new Vec(r, 1, 0), 1));
-
+    let p = new Player(new Vec(r, 1, 0), 1);
+    world.addBody(p);
 
     world.ui.elements.push(new Minimap(world));
     world.ui.elements.push(new Debug(world));
+    world.ui.elements.push(new Vitals(p));
 
     return world;
 
