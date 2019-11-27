@@ -18,6 +18,12 @@ class Element {
       case ALIGN.bottom_left:
         translate(0, height - this.h);
         break;
+      case ALIGN.top_right:
+        translate(0, 0);
+        break;
+      case ALIGN.top_left:
+        translate(width - this.w, 0);
+        break;
     }
 
     fill(0);
@@ -29,5 +35,7 @@ class Element {
 
 const ALIGN = {
   center: 0,
-  bottom_left: 1
+  bottom_left: 1,
+  top_right: 2,
+  top_left: 3
 }

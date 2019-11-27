@@ -9,10 +9,10 @@ class World {
     this.activeCam = 0;
     this.ui = new UICanvas();
 
-    this.ui.elements.push(new Minimap(this));
-
     this.minX = 0; this.minY = 0;
     this.maxX = 0; this.maxY = 0;
+
+    this.nActiveBodies = 0;
 
     this.sectors = 20;
 
@@ -41,18 +41,9 @@ class World {
     let camPolarLoc = this.cams[this.activeCam].loc.toPolar();
     let camSector = camPolarLoc.a / sectorSize;
 
-    for(let i = 0; i < this.bodies.length; i ++) {
-      let b1 = this.bodies[i];
-      for(let j = 0; j < this.bodies.length; j ++) {
-        let b2 = this.bodies[j];
-        if(i != j) {
-          b1.collide(b2);
-        }
-      }
-    }
 
-
-    let newBodies = []
+    let newBodies = [];
+    let activeBodies = [];
     this.minX = 9999999999; this.minY = 9999999999;
     this.maxX = -9999999999; this.maxY = -9999999999;
 
@@ -72,10 +63,10 @@ class World {
       if(x < this.minX) this.minX = x;
       if(y < this.minY) this.minY = y;
 
-      if(abs(sector - camSector) < sectorSize || body.alwaysRender) {
-
+      if(abs(sector - camSector) < sectorSize / 2 || body.alwaysRender) {
         if(!body.update(deltaTime / 1000.0, this.input)) {
           newBodies.push(body);
+          activeBodies.push(body);
         }
 
       } else {
@@ -83,9 +74,18 @@ class World {
       }
     }
 
-
     this.bodies = newBodies;
+    this.nActiveBodies = activeBodies.length;
 
+    for(let i = 0; i < activeBodies.length; i ++) {
+      let b1 = activeBodies[i];
+      for(let j = 0; j < activeBodies.length; j ++) {
+        let b2 = activeBodies[j];
+        if(i != j) {
+          b1.collide(b2);
+        }
+      }
+    }
   }
 
   keyPressed() {

@@ -28,8 +28,8 @@ class Minimap extends Element {
     }
     stroke(255);
     strokeWeight(3);
-    line(0, 0, 200, 0);
-    line(200, 0, 200, 200);
+    line(0, 0, this.w, 0);
+    line(this.w, 0, this.w, this.h);
     pop();
   }
 

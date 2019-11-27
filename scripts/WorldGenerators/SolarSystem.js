@@ -10,10 +10,10 @@ class SolarSystem extends WorldGenerator {
 
     let world = new World();
 
-    const r = 500;
+    const r = 750;
     world.cams[0].loc = new Vec(r, 0, 0);
 
-    const nAsteroids = 1250;
+    const nAsteroids = 2000;
     for(let i = 0; i < nAsteroids; i ++) {
       let angle = i * TAU / nAsteroids;
       let radius;
@@ -26,8 +26,11 @@ class SolarSystem extends WorldGenerator {
     }
     world.addBody(new Sun(new Vec(0, 0, 0), 50, 50));
 
-    world.addBody(new Player(new Vec(r, 0, 0), 1));
+    world.addBody(new Player(new Vec(r, 1, 0), 1));
 
+
+    world.ui.elements.push(new Minimap(world));
+    world.ui.elements.push(new Debug(world));
 
     return world;
 

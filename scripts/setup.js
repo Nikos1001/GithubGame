@@ -6,7 +6,7 @@ function setup() {
   background(0);
   let gen = new SolarSystem();
   world = gen.createWorld();
-
+  frameRate(60);
 }
 
 function draw() {

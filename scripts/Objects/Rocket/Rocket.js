@@ -36,6 +36,8 @@ class Rocket extends Body {
     this.radius = 0.16;
 
     this.health = 5;
+
+    this.alwaysRender = true;
   }
 
   update(delta, input) {

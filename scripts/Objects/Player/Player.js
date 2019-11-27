@@ -26,10 +26,8 @@ class Player extends Rocket {
   }
 
   display(cam) {
-    super.display(cam);
-
     cam.loc = this.loc.clone();
-
+    super.display(cam);
   }
 
   addForce(force) {
