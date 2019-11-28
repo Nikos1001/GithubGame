@@ -11,12 +11,16 @@ class Body {
     this.radius = 1;
 
     this.alwaysRender = false;
+
+    this.naturalDecelaration = 0.5;
   }
 
   update(delta, input) {
     this.vel.add(this.acc);
     this.loc.add(this.vel.clone().mult(delta));
     this.acc.mult(0);
+
+    this.vel.mult(1 - delta * this.naturalDecelaration);
   }
 
   addForce(force) {
@@ -54,6 +58,10 @@ class Body {
 
   getColor() {
     return [255, 255, 255];
+  }
+
+  isDead() {
+    return false;
   }
 
 }

@@ -2,31 +2,35 @@
 
 class Player extends Rocket {
 
-  constructor(loc, mass) {
-    super(loc, mass);
+  constructor(loc, mass, fleet) {
+    super(loc, mass, fleet);
   }
 
   update(delta, input) {
     if(super.update(delta, input)) return true;
 
-    if(input.keys['a']) {
-      this.turn(delta, -1);
-    }
-    if(input.keys['d']) {
-      this.turn(delta, 1);
-    }
-    if(input.keys['w'] && !input.keys['s']) {
-      this.thrust(delta);
-      this.thrusting = true;
-    }
-    if(input.keys['s'] && !input.keys['w']) {
-      this.decelerate(delta);
+    if(this.active) {
+      if(input.keys['a']) {
+        this.turn(delta, -1);
+      }
+      if(input.keys['d']) {
+        this.turn(delta, 1);
+      }
+      if(input.keys['w'] && !input.keys['s']) {
+        this.thrust(delta);
+        this.thrusting = true;
+      }
+      if(input.keys['s'] && !input.keys['w']) {
+        this.decelerate(delta);
+      }
     }
 
   }
 
   display(cam) {
-    cam.loc = this.loc.clone();
+    if(this.active) {
+      cam.loc = this.loc.clone();
+    }
     super.display(cam);
   }
 
@@ -56,6 +60,10 @@ class Player extends Rocket {
 
   decelerate(delta) {
     super.decelerate(delta);
+  }
+
+  isDead() {
+    return super.isDead();
   }
 
 }

@@ -3,7 +3,7 @@
 
 class Rocket extends Body {
 
-  constructor(loc, mass) {
+  constructor(loc, mass, fleet) {
     super(loc, mass);
     this.p = new Polygon();
     this.p.addVert(new Polar(0, 0.33, 0)); // 0
@@ -39,6 +39,8 @@ class Rocket extends Body {
 
     this.alwaysRender = true;
     this.active = true;
+
+    this.fleet = fleet;
   }
 
   update(delta, input) {
@@ -48,10 +50,6 @@ class Rocket extends Body {
     this.fire.setLoc(this.loc);
     this.p.setTransform(this.angle, 1);
     this.fire.setTransform(this.angle, 1);
-
-    if(this.health < 0) {
-      return true;
-    }
 
   }
 
@@ -102,5 +100,8 @@ class Rocket extends Body {
     this.thrusting = false;
   }
 
+  isDead() {
+    return this.health < 0;
+  }
 
 }

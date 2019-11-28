@@ -5,6 +5,7 @@ class World {
   constructor() {
     this.bodies = [];
     this.cams = [new Camera()];
+    this.teams = [];
     this.input = new InputManager();
     this.activeCam = 0;
     this.ui = new UICanvas();
@@ -64,7 +65,8 @@ class World {
       if(y < this.minY) this.minY = y;
 
       if(abs(sector - camSector) < sectorSize / 2 || body.alwaysRender) {
-        if(!body.update(deltaTime / 1000.0, this.input)) {
+        if(!body.isDead()) {
+          body.update(deltaTime / 1000.0, this.input);
           newBodies.push(body);
           activeBodies.push(body);
         }
@@ -85,6 +87,10 @@ class World {
           b1.collide(b2);
         }
       }
+    }
+
+    for(let i = 0; i < this.teams.length; i ++) {
+      this.teams[i].update();
     }
   }
 

@@ -25,13 +25,23 @@ class SolarSystem extends WorldGenerator {
       world.addBody(new Meteor(new Vec(cos(angle) * radius, sin(angle) * radius, 0), random(0.25, 1.5)));
     }
     world.addBody(new Sun(new Vec(0, 0, 0), 50, 50));
+    let playerFleet;
 
-    let p = new Player(new Vec(r, 1, 0), 1);
+    let p = new Player(new Vec(r, 1, 0), 1, playerFleet);
+    let p1 = new Player(new Vec(r + 2, 1, 0), 1, playerFleet);
     world.addBody(p);
+    world.addBody(p1);
 
     world.ui.elements.push(new Minimap(world));
     world.ui.elements.push(new Debug(world));
-    world.ui.elements.push(new Vitals(p));
+    let vitals = new Vitals(p);
+    world.ui.elements.push(vitals);
+
+    playerFleet = new PlayerFleet(world, vitals);
+    playerFleet.units.push(p);
+    playerFleet.units.push(p1);
+
+    world.teams.push(playerFleet);
 
     return world;
 

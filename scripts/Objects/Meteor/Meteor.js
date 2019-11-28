@@ -61,4 +61,8 @@ class Meteor extends Body {
     return [125, 125, 125];
   }
 
+  isDead() {
+    return false;
+  }
+
 }
