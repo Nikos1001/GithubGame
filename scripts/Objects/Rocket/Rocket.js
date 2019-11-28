@@ -24,7 +24,7 @@ class Rocket extends Body {
     this.fire.addConnection(0, 1, SEG_TYPES.red);
     this.fire.addConnection(1, 2, SEG_TYPES.red);
 
-    this.angle = 0;
+    this.angle = 3 * TAU / 4;
     this.thrusting = false;
 
 

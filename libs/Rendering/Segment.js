@@ -25,6 +25,10 @@ class Segment {
         stroke(255, 125, 0);
         line(v1.x, v1.y, v2.x, v2.y);
         break;
+      case SEG_TYPES.grey:
+      stroke(75, 75, 75);
+      line(v1.x, v1.y, v2.x, v2.y);
+      break;
     }
 
   }
