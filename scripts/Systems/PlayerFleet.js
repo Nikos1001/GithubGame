@@ -29,12 +29,6 @@ class PlayerFleet extends Fleet {
 
       this.units[this.activeUnit].active = true;
       this.vitalsUI.rocket = this.units[this.activeUnit];
-
-      for(let i = 1; i < 11; i ++) {
-        if(this.world.input.keys[i.toString()]) {
-          this.activeUnit = i - 1;
-        }
-      }
     }
   }
 

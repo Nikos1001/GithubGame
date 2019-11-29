@@ -27,8 +27,8 @@ class SolarSystem extends WorldGenerator {
     world.addBody(new Sun(new Vec(0, 0, 0), 50, 50));
     let playerFleet;
 
-    let p = new Player(new Vec(r - 1.5, -1.5, 0), 1, playerFleet);
-    let p1 = new Player(new Vec(r - 0.75, -1.5, 0), 1, playerFleet);
+    let p = new Player(new Vec(r - 1.5, -1.5, 0), 1, playerFleet, world);
+    let p1 = new Player(new Vec(r - 0.75, -1.5, 0), 1, playerFleet, world);
     let b = new Base(new Vec(r, 0, 0), [255, 0, 0], playerFleet);
     world.addBody(b);
     world.addBody(p);
@@ -40,8 +40,8 @@ class SolarSystem extends WorldGenerator {
     world.ui.elements.push(vitals);
 
     playerFleet = new PlayerFleet(world, vitals);
-    playerFleet.units.push(b);
     playerFleet.units.push(p);
+    playerFleet.units.push(b);
     playerFleet.units.push(p1);
 
     world.teams.push(playerFleet);

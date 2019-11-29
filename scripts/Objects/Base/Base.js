@@ -9,6 +9,8 @@ class Base extends Body {
 
     this.fleet = fleet;
 
+    this.inventory = new Inventory(this);
+
     this.p = new Polygon();
 
     const pts = 16;

@@ -2,8 +2,8 @@
 
 class Player extends Rocket {
 
-  constructor(loc, mass, fleet) {
-    super(loc, mass, fleet);
+  constructor(loc, mass, fleet, world) {
+    super(loc, mass, fleet, world);
   }
 
   update(delta, input) {
@@ -22,6 +22,9 @@ class Player extends Rocket {
       }
       if(input.keys['s'] && !input.keys['w']) {
         this.decelerate(delta);
+      }
+      if(input.keys[' ']) {
+        this.inventory.use();
       }
     }
 
