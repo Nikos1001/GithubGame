@@ -35,9 +35,9 @@ class SolarSystem extends WorldGenerator {
     world.addBody(p1);
 
     world.ui.elements.push(new Minimap(world));
-    world.ui.elements.push(new Debug(world));
     let vitals = new Vitals(p);
     world.ui.elements.push(vitals);
+    world.ui.elements.push(new Debug(world));
 
     playerFleet = new PlayerFleet(world, vitals);
     playerFleet.units.push(p);

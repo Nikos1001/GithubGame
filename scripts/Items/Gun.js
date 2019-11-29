@@ -6,6 +6,7 @@ class Gun extends Item {
     super();
     this.rocket = rocket;
     this.world = rocket.world;
+    this.lastShot = 0;
   }
 
   drawIcon(scl) {
@@ -35,7 +36,11 @@ class Gun extends Item {
   }
 
   use() {
-    background(255);
+    if(millis() - this.lastShot > 500) {
+      let bullet = new Bullet(this.rocket.loc.clone(), this.rocket.angle);
+      this.world.addBody(bullet);
+      this.lastShot = millis();
+    }
   }
 
 }
