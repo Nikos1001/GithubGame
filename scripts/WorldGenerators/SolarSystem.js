@@ -1,4 +1,4 @@
-//
+////
 
 class SolarSystem extends WorldGenerator {
 
