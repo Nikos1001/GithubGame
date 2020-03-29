@@ -1,4 +1,4 @@
-//mouse of house
+//mouse of hous
 
 class Vec {
 
